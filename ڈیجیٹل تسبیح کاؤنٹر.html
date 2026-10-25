@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/Faizan/Downloads/digital_tasbeeh_counter.html -->
+<html lang="ur" dir="rtl" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ڈیجیٹل تسبیح کاؤنٹر</title>
+<style>
+  :root { --green:#064b38; --deep:#032e25; --gold:#e7c779; --cream:#fff8e8; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; display:grid; place-items:center; padding:22px;
+    font-family:Tahoma, Arial, sans-serif; color:#173b30;
+    background:radial-gradient(circle at top, #f8e7bc 0, #d9b879 35%, #315b4b 100%);
+  }
+  .app {
+    width:min(100%, 470px); padding:18px; border:3px solid var(--gold);
+    border-radius:28px; background:var(--cream); box-shadow:0 18px 50px #001b1680;
+  }
+  header {
+    text-align:center; padding:22px 12px; color:#fff8e8;
+    background:linear-gradient(145deg,var(--green),var(--deep));
+    border:2px solid var(--gold); border-radius:20px; margin-bottom:16px;
+  }
+  .moon { font-size:30px; color:var(--gold); }
+  h1 { font-size:27px; margin:8px 0; }
+  header p { margin:0; color:#f1dfb1; font-size:14px; }
+  .phrase { text-align:center; font-size:25px; font-weight:bold; margin:20px 0 6px; color:var(--green); }
+  .sub { text-align:center; color:#68776e; margin-bottom:16px; font-size:14px; }
+  .count-card {
+    text-align:center; background:linear-gradient(145deg,#07553c,#032e25);
+    color:white; border:3px solid var(--gold); border-radius:24px; padding:18px;
+    box-shadow:inset 0 0 0 3px #ffffff12;
+  }
+  .count-label { color:#f1dfb1; font-size:14px; }
+  #count { font-size:64px; line-height:1.2; font-weight:bold; margin:5px 0; font-variant-numeric:tabular-nums; }
+  .goal { text-align:center; margin:18px 0 8px; font-weight:bold; }
+  .bar { height:12px; background:#deded7; border-radius:99px; overflow:hidden; }
+  #progress { height:100%; width:0%; background:linear-gradient(90deg,#20a05a,#7bcf81); transition:width .2s; }
+  .stats { display:flex; justify-content:space-between; gap:8px; margin:12px 0 18px; }
+  .pill { background:#eee8d8; border-radius:99px; padding:9px 12px; font-size:14px; }
+  button { font:inherit; cursor:pointer; border:0; transition:transform .08s, filter .15s; }
+  button:active { transform:scale(.97); }
+  .main-btn {
+    display:block; width:100%; min-height:105px; border-radius:22px; color:white;
+    background:linear-gradient(145deg,#18a85d,#08713f); border:3px solid var(--gold);
+    box-shadow:0 5px 0 #03452d; font-size:24px; font-weight:bold;
+  }
+  .main-btn small { display:block; font-size:14px; font-weight:normal; margin-top:4px; }
+  .buttons { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:16px; }
+  .small-btn { border-radius:14px; padding:13px 5px; background:#fffdf6; border:1px solid #c9b985; color:var(--green); font-weight:bold; }
+  .reset { color:#a7273d; }
+  .message { min-height:25px; text-align:center; color:var(--green); font-weight:bold; margin-top:15px; }
+  footer { text-align:center; color:#6d786e; font-size:12px; margin-top:14px; }
+</style>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="./ڈیجیٹل تسبیح کاؤنٹر_files/m=el_main_css"></head>
+<body>
+<main class="app">
+  <header>
+    <div class="moon">☾ ✦ ☪</div>
+    <h1>ڈیجیٹل تسبیح کاؤنٹر</h1>
+    <p>اللہ کا ذکر، دل کا سکون</p>
+  </header>
+
+  <div class="phrase">یا سَلَامُ، یا جَبَّارُ</div>
+  <div class="sub">تسبیح پڑھیں، پھر بٹن دبائیں</div>
+
+  <section class="count-card" aria-live="polite">
+    <div class="count-label">اب تک کی گنتی</div>
+    <div id="count">133</div>
+    <div class="count-label">مرتبہ</div>
+  </section>
+
+  <div class="goal">روزانہ ہدف: <span id="goalText">1,000</span> مرتبہ</div>
+  <div class="bar"><div id="progress" style="width: 13%;"></div></div>
+  <div class="stats">
+    <div class="pill"><span id="percent">13</span>% مکمل</div>
+    <div class="pill">باقی: <strong id="remaining">867</strong></div>
+  </div>
+
+  <button class="main-btn" id="addOne" style="opacity: 1;">＋ ایک تسبیح گنیں<small>ہر ذکر کے بعد دبائیں</small></button>
+  <div class="buttons">
+    <button class="small-btn" id="add33" style="opacity: 1;">+33 مرتبہ</button>
+    <button class="small-btn" id="add100" style="opacity: 1;">+100 مرتبہ</button>
+    <button class="small-btn reset" id="reset">دوبارہ شروع</button>
+  </div>
+  <div class="message" id="message">ماشاءاللہ! 133 مرتبہ مکمل۔ جاری رکھیں!</div>
+  <footer>آپ کی گنتی اسی براؤزر میں خودکار طور پر محفوظ ہوتی ہے۔</footer>
+</main>
+
+<script>
+  const TARGET = 1000;
+  const STORAGE_KEY = "digitalTasbeehCount_v1";
+  let count = Number(localStorage.getItem(STORAGE_KEY));
+  if (!Number.isFinite(count) || count < 0) count = 100;
+  count = Math.min(Math.floor(count), TARGET);
+
+  const countEl = document.getElementById("count");
+  const remainingEl = document.getElementById("remaining");
+  const percentEl = document.getElementById("percent");
+  const progressEl = document.getElementById("progress");
+  const messageEl = document.getElementById("message");
+
+  function render() {
+    const remaining = Math.max(0, TARGET - count);
+    const percent = Math.round((count / TARGET) * 100);
+    countEl.textContent = count.toLocaleString("en-US");
+    remainingEl.textContent = remaining.toLocaleString("en-US");
+    percentEl.textContent = percent;
+    progressEl.style.width = percent + "%";
+    localStorage.setItem(STORAGE_KEY, String(count));
+    messageEl.textContent = count >= TARGET
+      ? "ماشاءاللہ! آپ نے 1,000 کا ہدف پورا کر لیا! 🤲"
+      : `ماشاءاللہ! ${count.toLocaleString("en-US")} مرتبہ مکمل۔ جاری رکھیں!`;
+    document.getElementById("addOne").disabled = count >= TARGET;
+    document.getElementById("add33").disabled = count >= TARGET;
+    document.getElementById("add100").disabled = count >= TARGET;
+    ["addOne","add33","add100"].forEach(id => {
+      document.getElementById(id).style.opacity = count >= TARGET ? ".55" : "1";
+    });
+  }
+  function add(amount) { count = Math.min(TARGET, count + amount); render(); }
+  document.getElementById("addOne").addEventListener("click", () => add(1));
+  document.getElementById("add33").addEventListener("click", () => add(33));
+  document.getElementById("add100").addEventListener("click", () => add(100));
+  document.getElementById("reset").addEventListener("click", () => {
+    if (confirm("کیا آپ گنتی صفر سے شروع کرنا چاہتے ہیں؟")) { count = 0; render(); }
+  });
+  render();
+</script><div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="display: none; border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: &#39;Google Sans&#39;, Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class="VIpgJd-yAWNEb-hvhgNd-Ud7fr"><img src="./ڈیجیٹل تسبیح کاؤنٹر_files/24px.svg" width="24" height="24" alt=""><div class=" VIpgJd-yAWNEb-hvhgNd-IuizWc-i3jM8c " dir="ltr">Original text</div></div><div class="VIpgJd-yAWNEb-hvhgNd-k77Iif"><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">Rate this translation</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">Your feedback will be used to help improve Google Translate</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Good translation" aria-label="Good translation" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Poor translation" aria-label="Poor translation" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="file://translate.googleapis.com/translate_voting?client=te_lib" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0" src="./ڈیجیٹل تسبیح کاؤنٹر_files/saved_resource.html"></iframe></div></div></div>
+
+
+</body></html>
